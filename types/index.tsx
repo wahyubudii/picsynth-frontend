@@ -1,9 +1,9 @@
 import { FormEvent } from "react";
 
 export type HeadLineProps = {
-  title: string,
-  subTitle: string
-}
+  title: string;
+  subTitle: string;
+};
 
 export type LayoutProps = {
   children: React.ReactNode;
@@ -37,4 +37,16 @@ export type FormFieldProps = {
 export type RenderCardProps = {
   data: string | any;
   title: string;
+};
+
+export type PostProps = {
+  _id: string;
+  name: string;
+  prompt: string;
+  photo: string;
+};
+
+export type DownloadImage = {
+  _id: string;
+  photo: string;
 };

@@ -1,11 +1,12 @@
-import { HeadLineProps, MetaProps, RenderCardProps } from "@/types";
+import { HeadLineProps, MetaProps, PostProps, RenderCardProps } from "@/types";
 import { logo } from "../public/assets";
 import Layout from "@/components/Global/BaseLayout";
 import Card from "@/components/Global/Card";
 import Loader from "@/components/Global/Loader";
 import FormField from "@/components/Global/FormField";
-import { useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import HeadLine from "@/components/Section/HeadLine";
+import Image from "next/image";
 
 const headLine: HeadLineProps = {
   title: "The Community Showcase",
@@ -26,25 +27,83 @@ const RenderCards = ({ data, title }: RenderCardProps) => {
   }
 
   return (
-    <h2 className="mt-5 font-bold text-[#6449ff] text-xl uppercase">{title}</h2>
+    <h2 className="mt-5 font-bold text-[#6449ff] text-base uppercase">
+      {title}
+    </h2>
   );
 };
 
 export default function index() {
-  const [loading, setLoading] = useState(false);
-  const [allPost, setAllPost] = useState(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [allPost, setAllPost] = useState<any>();
 
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState<string>("");
+  const [searchedResults, setSearchedResults] = useState<any>(null);
+  const [searchTimeout, setSearchTimeout] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(
+          "https://be-picsynth.vercel.app/api/post",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (response.ok) {
+          const result = await response.json();
+
+          setAllPost(result.data.reverse());
+        }
+      } catch (err) {
+        alert(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
+  const handleSearchChange = (
+    e: FormEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    clearTimeout(searchTimeout);
+    setSearchText(e.currentTarget.value);
+
+    setSearchTimeout(
+      setTimeout(() => {
+        const searchResult = allPost.filter(
+          (item: PostProps) =>
+            item.name.toLowerCase().includes(searchText.toLowerCase()) ||
+            item.prompt.toLowerCase().includes(searchText.toLowerCase())
+        );
+        setSearchedResults(searchResult);
+      }, 500)
+    );
+  };
 
   return (
     <Layout customMeta={meta}>
       <HeadLine title={headLine.title} subTitle={headLine.subTitle} />
 
       <div className="mt-16">
-        <FormField />
+        <FormField
+          labelName="Search Post"
+          type="text"
+          name="text"
+          placeholder="Search something..."
+          value={searchText}
+          handleChange={handleSearchChange}
+        />
       </div>
 
-      <div className="mt-10">
+      <div className="my-10">
         {loading ? (
           <div className="flex justify-center items-center">
             <Loader />
@@ -52,16 +111,19 @@ export default function index() {
         ) : (
           <>
             {searchText && (
-              <h2 className="font-medium text-[#666e75] text-xl mb-3">
-                Showing result for{" "}
-                <span className="text-[#222328]">{searchText}</span>
+              <h2 className="font-medium text-[#666e75] text-base mb-3">
+                Showing Resuls for{" "}
+                <span className="text-[#222328]">{searchText}</span>:
               </h2>
             )}
-            <div className="grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3">
+            <div className="grid gap-3 grid-cols-1 lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2">
               {searchText ? (
-                <RenderCards data={[]} title="No search results found" />
+                <RenderCards
+                  data={searchedResults}
+                  title="No Search Results Found"
+                />
               ) : (
-                <RenderCards data={[]} title="No posts found" />
+                <RenderCards data={allPost} title="No Posts Yet" />
               )}
             </div>
           </>
