@@ -13,7 +13,7 @@ export type LayoutProps = {
 export type MetaProps = {
   title: string;
   description: string;
-  favicon: string;
+  favicon?: string | any;
   type: string;
 };
 

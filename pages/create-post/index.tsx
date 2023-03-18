@@ -1,6 +1,6 @@
 import React, { FormEvent, useState } from "react";
 import { useRouter } from "next/router";
-import { logo } from "@/public/assets";
+import { favicon } from "@/public/assets";
 import { preview } from "@/public/assets";
 import { FormState, HeadLineProps, MetaProps } from "@/types";
 import { getRandomPrompt } from "@/utils/getRandomPrompt";
@@ -19,7 +19,7 @@ const headLine: HeadLineProps = {
 const meta: MetaProps = {
   title: "PicSynth | Create Post",
   description: "Project portofolio integrate with DALL-E.",
-  favicon: logo.src,
+  favicon: favicon,
   type: "website",
 };
 
@@ -128,7 +128,7 @@ export default function CreatePost() {
             handleSurpriseMe={handleSurpriseMe}
           />
 
-          <div className="relative bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-64 p-3 h-64 flex justify-center items-center">
+          <div className="relative bg-gray-50 dark:bg-gray-500 border border-gray-300 dark:border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-64 p-3 h-64 flex justify-center items-center">
             {form.photo ? (
               <Image
                 src={form.photo}
@@ -164,7 +164,7 @@ export default function CreatePost() {
           </button>
         </div>
         <div className="mt-10">
-          <p className="mt-2 text-[#666e75] text-[14px]">
+          <p className="mt-2 text-[#666e75] text-[14px] dark:text-gray-300">
             ** Once you have created the image you want, you can share it with
             others in the community **
           </p>

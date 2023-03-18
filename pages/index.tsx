@@ -1,12 +1,11 @@
 import { HeadLineProps, MetaProps, PostProps, RenderCardProps } from "@/types";
-import { logo } from "../public/assets";
+import { favicon } from "../public/assets";
 import Layout from "@/components/Global/BaseLayout";
 import Card from "@/components/Global/Card";
 import Loader from "@/components/Global/Loader";
 import FormField from "@/components/Global/FormField";
 import { FormEvent, useEffect, useState } from "react";
 import HeadLine from "@/components/Section/HeadLine";
-import Image from "next/image";
 
 const headLine: HeadLineProps = {
   title: "The Community Showcase",
@@ -17,7 +16,7 @@ const headLine: HeadLineProps = {
 const meta: MetaProps = {
   title: "PicSynth | Homepage",
   description: "Project portofolio integrate with DALL-E.",
-  favicon: logo.src,
+  favicon: favicon,
   type: "website",
 };
 
@@ -111,9 +110,12 @@ export default function Home() {
         ) : (
           <>
             {searchText && (
-              <h2 className="font-medium text-[#666e75] text-base mb-3">
+              <h2 className="font-medium text-[#666e75] dark:text-gray-300 text-base mb-3">
                 Showing Resuls for{" "}
-                <span className="text-[#222328]">{searchText}</span>:
+                <span className="text-[#222328] dark:text-gray-100">
+                  {searchText}
+                </span>
+                :
               </h2>
             )}
             <div className="grid gap-3 grid-cols-1 lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2">
