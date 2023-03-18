@@ -1,6 +1,6 @@
 import React, { FormEvent, useState } from "react";
 import { useRouter } from "next/router";
-import { favicon } from "@/public/assets";
+import { logo } from "@/public/assets";
 import { preview } from "@/public/assets";
 import { FormState, HeadLineProps, MetaProps } from "@/types";
 import { getRandomPrompt } from "@/utils/getRandomPrompt";
@@ -17,9 +17,9 @@ const headLine: HeadLineProps = {
 };
 
 const meta: MetaProps = {
-  title: "PicSynth | Create Post",
+  title: "Picsynth | Create Post",
   description: "Project portofolio integrate with DALL-E.",
-  favicon: favicon,
+  favicon: logo.src,
   type: "website",
 };
 

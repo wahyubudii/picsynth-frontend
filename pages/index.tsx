@@ -1,5 +1,5 @@
 import { HeadLineProps, MetaProps, PostProps, RenderCardProps } from "@/types";
-import { favicon } from "../public/assets";
+import { logo } from "../public/assets";
 import Layout from "@/components/Global/BaseLayout";
 import Card from "@/components/Global/Card";
 import Loader from "@/components/Global/Loader";
@@ -14,9 +14,9 @@ const headLine: HeadLineProps = {
 };
 
 const meta: MetaProps = {
-  title: "PicSynth | Homepage",
+  title: "Picsynth | Homepage",
   description: "Project portofolio integrate with DALL-E.",
-  favicon: favicon,
+  favicon: logo.src,
   type: "website",
 };
 
