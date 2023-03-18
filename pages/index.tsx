@@ -33,7 +33,7 @@ const RenderCards = ({ data, title }: RenderCardProps) => {
   );
 };
 
-export default function index() {
+export default function Home() {
   const [loading, setLoading] = useState<boolean>(false);
   const [allPost, setAllPost] = useState<any>();
 
