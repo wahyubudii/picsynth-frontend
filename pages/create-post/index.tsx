@@ -131,6 +131,7 @@ export default function CreatePost() {
           <div className="relative bg-gray-50 dark:bg-gray-500 border border-gray-300 dark:border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-64 p-3 h-64 flex justify-center items-center">
             {form.photo ? (
               <Image
+                draggable={false}
                 src={form.photo}
                 height={300}
                 width={400}
@@ -139,6 +140,7 @@ export default function CreatePost() {
               />
             ) : (
               <Image
+                draggable={false}
                 src={preview}
                 height={300}
                 width={400}

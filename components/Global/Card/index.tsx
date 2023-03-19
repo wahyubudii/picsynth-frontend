@@ -32,6 +32,7 @@ export default function Card({ _id, name, prompt, photo }: PostProps) {
         alt={prompt}
         height={300}
         width={300}
+        draggable={false}
       />
       <div className="group-hover:flex flex-col max-h-[94.5%] hidden absolute bottom-0 left-0 right-0 bg-[#10131f]/75 p-4 rounded-md">
         <p className="text-white text-sm overflow-y-auto prompt">{prompt}</p>
